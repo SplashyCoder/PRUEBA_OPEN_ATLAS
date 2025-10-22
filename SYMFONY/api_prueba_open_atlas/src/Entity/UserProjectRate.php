@@ -17,7 +17,7 @@ class UserProjectRate
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $rate = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 3)]
     private ?string $currency = null;
 
     #[ORM\Column]
@@ -27,10 +27,18 @@ class UserProjectRate
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'userProjectRates')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'userProjectRates')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Project $project = null;
+
+     public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
 
 
     public function getId(): ?int

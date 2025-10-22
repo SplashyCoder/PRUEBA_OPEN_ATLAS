@@ -34,9 +34,18 @@ class Project
     #[ORM\OneToMany(targetEntity: UserProjectRate::class, mappedBy: 'project')]
     private Collection $userProjectRates;
 
+    /**
+     * @var Collection<int, Task>
+     */
+    #[ORM\OneToMany(targetEntity: Task::class, mappedBy: 'project')]
+    private Collection $tasks;
+
     public function __construct()
     {
         $this->userProjectRates = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -116,6 +125,36 @@ class Project
             // set the owning side to null (unless already changed)
             if ($userProjectRate->getProject() === $this) {
                 $userProjectRate->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Task>
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): static
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks->add($task);
+            $task->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): static
+    {
+        if ($this->tasks->removeElement($task)) {
+            // set the owning side to null (unless already changed)
+            if ($task->getProject() === $this) {
+                $task->setProject(null);
             }
         }
 

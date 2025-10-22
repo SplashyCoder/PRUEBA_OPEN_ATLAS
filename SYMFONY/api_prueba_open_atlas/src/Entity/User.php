@@ -36,6 +36,8 @@ class User
     public function __construct()
     {
         $this->userProjectRates = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
