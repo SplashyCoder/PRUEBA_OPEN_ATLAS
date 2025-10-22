@@ -121,7 +121,6 @@ class User
     public function removeUserProjectRate(UserProjectRate $userProjectRate): static
     {
         if ($this->userProjectRates->removeElement($userProjectRate)) {
-            // set the owning side to null (unless already changed)
             if ($userProjectRate->getUser() === $this) {
                 $userProjectRate->setUser(null);
             }
@@ -151,7 +150,6 @@ class User
     public function removeTask(Task $task): static
     {
         if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
             if ($task->getUser() === $this) {
                 $task->setUser(null);
             }
