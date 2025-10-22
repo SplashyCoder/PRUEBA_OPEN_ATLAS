@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserProjectRate index{% endblock %}
+
+{% block body %}
+    <h1>UserProjectRate index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Rate</th>
+                <th>Currency</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user_project_rate in user_project_rates %}
+            <tr>
+                <td>{{ user_project_rate.id }}</td>
+                <td>{{ user_project_rate.rate }}</td>
+                <td>{{ user_project_rate.currency }}</td>
+                <td>{{ user_project_rate.createdAt ? user_project_rate.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user_project_rate.updatedAt ? user_project_rate.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_user_project_rate_show', {'id': user_project_rate.id}) }}">show</a>
+                    <a href="{{ path('app_user_project_rate_edit', {'id': user_project_rate.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_project_rate_new') }}">Create new</a>
+{% endblock %}

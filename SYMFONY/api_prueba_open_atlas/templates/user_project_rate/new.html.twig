@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UserProjectRate{% endblock %}
+
+{% block body %}
+    <h1>Create new UserProjectRate</h1>
+
+    {{ include('user_project_rate/_form.html.twig') }}
+
+    <a href="{{ path('app_user_project_rate_index') }}">back to list</a>
+{% endblock %}
