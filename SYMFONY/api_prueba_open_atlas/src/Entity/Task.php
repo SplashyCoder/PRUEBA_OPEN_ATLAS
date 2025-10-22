@@ -40,6 +40,11 @@ class Task
     #[ORM\JoinColumn(nullable: false)]
     private ?Project $project = null;
 
+     public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+        $this->updatedAt = new \DateTimeImmutable();
+    }
     
 
     public function getId(): ?int
