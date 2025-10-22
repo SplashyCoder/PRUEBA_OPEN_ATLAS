@@ -26,6 +26,12 @@ class UserProjectRate
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'userProjectRates')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'userProjectRates')]
+    private ?Project $project = null;
+
 
     public function getId(): ?int
     {
@@ -76,6 +82,30 @@ class UserProjectRate
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getProject(): ?Project
+    {
+        return $this->project;
+    }
+
+    public function setProject(?Project $project): static
+    {
+        $this->project = $project;
 
         return $this;
     }

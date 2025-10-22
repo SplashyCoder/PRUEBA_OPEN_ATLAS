@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -24,6 +26,17 @@ class User
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
+
+    /**
+     * @var Collection<int, UserProjectRate>
+     */
+    #[ORM\OneToMany(targetEntity: UserProjectRate::class, mappedBy: 'user')]
+    private Collection $userProjectRates;
+
+    public function __construct()
+    {
+        $this->userProjectRates = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +87,36 @@ class User
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserProjectRate>
+     */
+    public function getUserProjectRates(): Collection
+    {
+        return $this->userProjectRates;
+    }
+
+    public function addUserProjectRate(UserProjectRate $userProjectRate): static
+    {
+        if (!$this->userProjectRates->contains($userProjectRate)) {
+            $this->userProjectRates->add($userProjectRate);
+            $userProjectRate->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProjectRate(UserProjectRate $userProjectRate): static
+    {
+        if ($this->userProjectRates->removeElement($userProjectRate)) {
+            // set the owning side to null (unless already changed)
+            if ($userProjectRate->getUser() === $this) {
+                $userProjectRate->setUser(null);
+            }
+        }
 
         return $this;
     }
