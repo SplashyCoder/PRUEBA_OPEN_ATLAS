@@ -61,9 +61,9 @@ export const TaskTable: React.FC<TaskTableProps> = ({ tasks, loading = false }) 
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Valor
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            {/* <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
               Descripción
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
@@ -83,11 +83,11 @@ export const TaskTable: React.FC<TaskTableProps> = ({ tasks, loading = false }) 
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 {task.hourly_rate ? `${task.hourly_rate.amount} ${task.hourly_rate.currency}` : 'No asignada'}
               </td>
-              <td className="px-6 py-4">
+              {/* <td className="px-6 py-4">
                 <div className="text-sm text-gray-500 max-w-xs truncate">
                   {task.task_description || 'Sin descripción'}
                 </div>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>

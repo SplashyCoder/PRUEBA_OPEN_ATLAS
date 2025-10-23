@@ -2,7 +2,6 @@ import type { UserHeaderType } from '@src/types/user/UserHeader.type';
 
 export const UserHeader: React.FC<UserHeaderType> = ({ 
   user, 
-  tasksCount, 
   loading = false 
 }) => {
   if (loading) {
@@ -28,11 +27,8 @@ export const UserHeader: React.FC<UserHeaderType> = ({
       <h1 className="text-3xl font-bold text-gray-900">
         Bienvenido, {user.name} 👋
       </h1>
-      <p className="text-gray-600 mt-2">
-        Tienes {tasksCount} tarea{tasksCount !== 1 ? 's' : ''} asignada{tasksCount !== 1 ? 's' : ''}
-      </p>
       <div className="mt-1 text-sm text-gray-500">
-        Email: {user.email} • ID: {user.id}
+        Email: {user.email}
       </div>
     </div>
   );
