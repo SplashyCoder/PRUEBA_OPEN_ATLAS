@@ -2,7 +2,7 @@ import axios from 'axios';
 import type { TaskwithDetailsType } from '@src/types/task/Task.type';
 const api_url = import.meta.env.VITE_API_URL
 
-export const api = axios.create({
+const api = axios.create({
     baseURL: api_url,
     headers: {
         'Content-Type': 'application/json',
