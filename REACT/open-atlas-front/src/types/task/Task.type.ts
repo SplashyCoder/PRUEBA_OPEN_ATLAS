@@ -2,11 +2,11 @@ export type TaskType = {
     id: number;
     title: string;
     description?: string;
-    status: 'pending' | 'in-progress' | 'completed';
+    status: 'pending' | 'in_progress' | 'completed';
     createdAt: string;
     updatedAt?: string;
     userId: number;
-    prjectId?: number;
+    projectId?: number;
 }
 
 export type TaskwithDetailsType = TaskType & {
@@ -16,7 +16,7 @@ export type TaskwithDetailsType = TaskType & {
         description?: string;
     }
     rate?:{
-        amount: number;
+        amount: string;
         currency: string;
     }
 } 
