@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { TaskTable } from '@src/components/table/TaskTable';
-import { taskService } from '../services/api';
+import { taskService } from '@src/services/tableApi/table.api';
 import type { TaskFromAPI } from '@src/types/task/Task.type';
 
 export const DashboardPage: React.FC = () => {
