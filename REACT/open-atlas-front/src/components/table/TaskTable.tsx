@@ -1,6 +1,10 @@
-import type { TableType } from "@src/types/table/Table.type";
+import type { TaskFromAPI } from '@src/types/task/Task.type';
+interface TaskTableProps {
+  tasks?: TaskFromAPI[];
+  loading?: boolean;
+}
 
-export const TaskTable: React.FC<TableType> = ({ tasks, loading = false }) => {
+export const TaskTable: React.FC<TaskTableProps> = ({ tasks, loading = false }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center p-8">
@@ -9,7 +13,7 @@ export const TaskTable: React.FC<TableType> = ({ tasks, loading = false }) => {
     );
   }
 
-  if (tasks?.length === 0) {
+  if (!tasks || tasks.length === 0) {
     return (
       <div className="text-center p-8 text-gray-500">
         No hay tareas disponibles
@@ -66,25 +70,25 @@ export const TaskTable: React.FC<TableType> = ({ tasks, loading = false }) => {
           </tr>
         </thead>
         <tbody className="bg-white divide-y divide-gray-200">
-          {tasks?.map((task) => (
-            <tr key={task.id} className="hover:bg-gray-50">
+          {tasks.map((task) => (
+            <tr key={task.task_id} className="hover:bg-gray-50">
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm font-medium text-gray-900">{task.title}</div>
+                <div className="text-sm font-medium text-gray-900">{task.task_title}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <div className="text-sm text-gray-900">{task.project.name}</div>
+                <div className="text-sm text-gray-900">{task.project_name}</div>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(task.status)}`}>
-                  {getStatusText(task.status)}
+                <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(task.task_status)}`}>
+                  {getStatusText(task.task_status)}
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {task.rate ? `${task.rate.amount} ${task.rate.currency}` : 'No asignada'}
+                {task.hourly_rate ? `${task.hourly_rate.amount} ${task.hourly_rate.currency}` : 'No asignada'}
               </td>
               <td className="px-6 py-4">
                 <div className="text-sm text-gray-500 max-w-xs truncate">
-                  {task.description || 'Sin descripción'}
+                  {task.task_description || 'Sin descripción'}
                 </div>
               </td>
             </tr>

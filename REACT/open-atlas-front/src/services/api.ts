@@ -1,16 +1,15 @@
 import axios from 'axios';
-import type { TaskwithDetailsType } from '@src/types/task/Task.type';
-const api_url = import.meta.env.VITE_API_URL
+import type { TasksResponse } from '@src/types/task/Task.type';
 
-const api = axios.create({
-    baseURL: api_url,
+export const api = axios.create({
+    baseURL: '',
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
 export const taskService = {
-  getUserTasks: async (userId: number): Promise<{ tasks: TaskwithDetailsType[] }> => {
+  getUserTasks: async (userId: number): Promise<TasksResponse> => {
     const response = await api.get(`/task/api/users/${userId}/tasks`);
     return response.data;
   },

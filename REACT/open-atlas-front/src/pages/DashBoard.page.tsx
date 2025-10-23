@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { TaskTable } from '@src/components/table/TaskTable';
-import { taskService } from '@src/services/api';
-import type { TaskwithDetailsType } from "@src/types/task/Task.type";
-
+import { taskService } from '../services/api';
+import type { TaskFromAPI } from '@src/types/task/Task.type';
 
 export const DashboardPage: React.FC = () => {
-  const [tasks, setTasks] = useState<TaskwithDetailsType[]>([]);
+  const [tasks, setTasks] = useState<TaskFromAPI[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -15,7 +14,6 @@ export const DashboardPage: React.FC = () => {
         setLoading(true);
         const response = await taskService.getUserTasks(1);
         setTasks(response.tasks);
-        console.log(tasks);
       } catch (err) {
         setError('Error al cargar las tareas');
         console.error('Error fetching tasks:', err);
@@ -25,7 +23,7 @@ export const DashboardPage: React.FC = () => {
     };
 
     fetchTasks();
-  }, [tasks]);
+  }, []);
 
   if (error) {
     return (
