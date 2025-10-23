@@ -12,6 +12,11 @@ export type TaskFromAPI = {
     task_description?: string;
 }
 
+export type TaskTableProps = {
+  tasks?: TaskFromAPI[];
+  loading?: boolean;
+}
+
 export type TasksResponse = {
     user_id: number;
     tasks_count: number;
