@@ -11,13 +11,20 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      // Proxy para todas las rutas que empiecen con /api
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
       },
+      // Proxy para rutas de task
       '/task': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+      // Proxy para rutas de user
+      '/user': {
         target: 'http://localhost:8000',
         changeOrigin: true,
         secure: false,
