@@ -36,7 +36,6 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
         <div className="mb-8">
           <UserHeader 
             user={user} 
@@ -45,7 +44,6 @@ export const DashboardPage: React.FC = () => {
           />
         </div>
 
-        {/* Controls Section */}
         <div className="mb-6 bg-white p-4 rounded-lg shadow">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <UserInput 
@@ -60,7 +58,6 @@ export const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Tasks Table */}
         <TaskTable tasks={tasks} loading={loading} />
       </div>
     </div>
