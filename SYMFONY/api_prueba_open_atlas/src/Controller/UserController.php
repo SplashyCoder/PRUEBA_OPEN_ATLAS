@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/user')]
 final class UserController extends AbstractController
@@ -42,11 +43,15 @@ final class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user): Response
+   #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
+    public function show(User $user): JsonResponse
     {
-        return $this->render('user/show.html.twig', [
-            'user' => $user,
+        return $this->json([
+            'id' => $user->getId(),
+            'name' => $user->getName(),
+            'email' => $user->getEmail(),
+            'createdAt' => $user->getCreatedAt()->format('Y-m-d H:i:s'),
+            'updatedAt' => $user->getUpdatedAt()->format('Y-m-d H:i:s'),
         ]);
     }
 
