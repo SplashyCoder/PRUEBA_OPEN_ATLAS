@@ -1,4 +1,4 @@
-export type Task = {
+export type TaskType = {
     id: number;
     title: string;
     description?: string;
@@ -9,7 +9,7 @@ export type Task = {
     prjectId?: number;
 }
 
-export type TaskwithDetails = Task & {
+export type TaskwithDetailsType = TaskType & {
     project: {
         id: number;
         name: string;
