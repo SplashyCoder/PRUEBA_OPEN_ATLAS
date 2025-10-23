@@ -1,3 +1,5 @@
+import type { UserType } from '../user/User.type';
+
 export type TaskFromAPI = {
     task_id: number;
     task_title: string;
@@ -8,7 +10,6 @@ export type TaskFromAPI = {
         amount: string;
         currency: string;
     };
-    // Agrega description si viene en la API
     task_description?: string;
 }
 
@@ -23,7 +24,6 @@ export type TasksResponse = {
     tasks: TaskFromAPI[];
 }
 
-// Si necesitas mantener el tipo anterior para otras partes, puedes crear:
 export type TaskwithDetailsType = {
     id: number;
     title: string;
@@ -38,4 +38,14 @@ export type TaskwithDetailsType = {
         amount: string;
         currency: string;
     };
+}
+
+export type userTasksReturnType = {
+  tasks: TaskFromAPI[];
+  user: UserType | null;
+  loading: boolean;
+  error: string | null;
+  userId: number;
+  setUserId: (id: number) => void;
+  refetch: () => void;
 }

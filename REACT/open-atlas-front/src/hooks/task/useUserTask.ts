@@ -3,18 +3,10 @@ import type { TaskFromAPI } from '@src/types/task/Task.type';
 import type { UserType } from '@src/types/user/User.type';
 import { taskService } from '@src/services/tableApi/table.api';
 import { userService } from '@src/services/userApi/user.api';
+import type { userTasksReturnType } from '@src/types/task/Task.type';
 
-interface UseUserTasksReturn {
-  tasks: TaskFromAPI[];
-  user: UserType | null;
-  loading: boolean;
-  error: string | null;
-  userId: number;
-  setUserId: (id: number) => void;
-  refetch: () => void;
-}
 
-export const useUserTasks = (initialUserId: number = 1): UseUserTasksReturn => {
+export const useUserTasks = (initialUserId: number = 1): userTasksReturnType => {
   const [userId, setUserId] = useState<number>(initialUserId);
   const [tasks, setTasks] = useState<TaskFromAPI[]>([]);
   const [user, setUser] = useState<UserType | null>(null);
