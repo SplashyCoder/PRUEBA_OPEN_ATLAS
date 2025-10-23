@@ -1,8 +1,5 @@
-import type { TaskFromAPI } from '@src/types/task/Task.type';
-interface TaskTableProps {
-  tasks?: TaskFromAPI[];
-  loading?: boolean;
-}
+import type { TaskTableProps } from '@src/types/task/Task.type';
+
 
 export const TaskTable: React.FC<TaskTableProps> = ({ tasks, loading = false }) => {
   if (loading) {
