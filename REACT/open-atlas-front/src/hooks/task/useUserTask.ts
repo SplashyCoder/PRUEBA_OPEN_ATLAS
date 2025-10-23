@@ -23,6 +23,7 @@ export const useUserTasks = (initialUserId: number = 1): UseUserTasksReturn => {
 
   useEffect(() => {
     searchUser();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const searchUser = async () => {
