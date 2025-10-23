@@ -1,10 +1,6 @@
-interface UserInputProps {
-  userId: number;
-  onUserIdChange: (userId: number) => void;
-  disabled?: boolean;
-}
+import type { userInputType } from "@src/types/user/UserInput.type";
 
-export const UserInput: React.FC<UserInputProps> = ({ 
+export const UserInput: React.FC<userInputType> = ({ 
   userId, 
   onUserIdChange, 
   disabled = false 
