@@ -1,5 +1,7 @@
 export type userInputType = {
-  userId: number;
+  userId?: number;
   onUserIdChange: (userId: number) => void;
+  onSearch: () => void;
+  loading?: boolean;
   disabled?: boolean;
 }

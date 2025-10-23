@@ -1,38 +1,33 @@
-import { useState, useEffect } from 'react';
 import { TaskTable } from '@src/components/table/TaskTable';
-import { taskService } from '@src/services/tableApi/table.api';
-import type { TaskFromAPI } from '@src/types/task/Task.type';
+import { UserHeader } from '@src/components/table/UserHeader';
+import { UserInput } from '@src/components/table/UserInput';
+import { useUserTasks } from '@src/hooks/task/useUserTask';
 
 export const DashboardPage: React.FC = () => {
-  const [tasks, setTasks] = useState<TaskFromAPI[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        setLoading(true);
-        const response = await taskService.getUserTasks(1);
-        setTasks(response.tasks);
-      } catch (err) {
-        setError('Error al cargar las tareas');
-        console.error('Error fetching tasks:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTasks();
-  }, []);
+  const {
+    tasks,
+    user,
+    loading,
+    error,
+    userId,
+    setUserId,
+    searchUser
+  } = useUserTasks(1);
 
   if (error) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="text-red-500 text-center">
+        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+          <div className="text-red-500 mb-4">
             <div className="text-xl font-semibold mb-2">Error</div>
             <div>{error}</div>
           </div>
+          <button
+            onClick={searchUser}
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors"
+          >
+            Reintentar
+          </button>
         </div>
       </div>
     );
@@ -41,20 +36,31 @@ export const DashboardPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto">
+        {/* Header Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard de Tareas</h1>
-          <p className="text-gray-600 mt-2">
-            Gestiona y visualiza todas tus tareas y proyectos
-          </p>
+          <UserHeader 
+            user={user} 
+            tasksCount={tasks.length} 
+            loading={loading} 
+          />
         </div>
 
-        <div className="mb-6 flex justify-between items-center">
-          <h2 className="text-xl font-semibold text-gray-800">Tareas del Usuario</h2>
-          <div className="text-sm text-gray-500">
-            Total: {tasks?.length} tareas
+        {/* Controls Section */}
+        <div className="mb-6 bg-white p-4 rounded-lg shadow">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <UserInput 
+              userId={userId} 
+              onUserIdChange={setUserId}
+              onSearch={searchUser}
+              loading={loading}
+            />
+            <div className="text-sm text-gray-500">
+              Total: {tasks.length} tarea{tasks.length !== 1 ? 's' : ''}
+            </div>
           </div>
         </div>
 
+        {/* Tasks Table */}
         <TaskTable tasks={tasks} loading={loading} />
       </div>
     </div>
